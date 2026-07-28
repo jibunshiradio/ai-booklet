@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AIは気になる。でも、何から始めればいいかわからない社長へ｜経営者のための15分冊子</title>
+<meta name="description" content="「様子見」にも値段があると知った、ある三代目社長の一年。15分で読めます。">
+
+<!-- LINEやSNSでURLを共有したときのプレビュー -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="AIは気になる。でも、何から始めればいいかわからない社長へ">
+<meta property="og:description" content="「様子見」にも値段があると知った、ある三代目社長の一年。15分で読めます。">
+<meta property="og:image" content="assets/cover.png">
+<meta property="og:site_name" content="ミミライル｜株式会社Avanti">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&family=Noto+Serif+JP:wght@400&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#F4EFE1;
+  --paper-band:#ECE4D1;
+  --ink:#16263F;
+  --ink-70:rgba(22,38,63,.70);
+  --ink-45:rgba(22,38,63,.45);
+  --marker:#EFC33F;
+  --marker-soft:rgba(239,195,63,.55);
+  --napkin:#EAE3D3;
+  --rule:rgba(22,38,63,.13);
+
+  --f-display:"Noto Sans JP",system-ui,sans-serif;
+  --f-body:"Noto Serif JP",serif;
+  --f-hand:"Zen Kurenaido","Noto Sans JP",sans-serif;
+
+  --measure:33em;
+  --pad:24px;
+}
+
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:17.5px;
+  line-height:1.95;
+  font-feature-settings:"palt" 1;
+}
+@media (min-width:768px){
+  body{font-size:19px;line-height:2.0;}
+  :root{--pad:40px;}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important;}
+}
+
+a{color:inherit;}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:2px;}
+
+.wrap{max-width:var(--measure);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad);}
+
+/* ── 進捗（残り時間） ───────────────────────── */
+.progress{position:fixed;inset:0 0 auto 0;z-index:50;pointer-events:none;}
+.progress__track{height:4px;background:rgba(22,38,63,.10);}
+.progress__fill{height:100%;width:0;background:var(--marker);transition:width .12s linear;}
+.progress__pill{
+  position:absolute;top:12px;right:12px;
+  background:var(--ink);color:var(--paper);
+  font-family:var(--f-display);font-weight:700;font-size:11.5px;letter-spacing:.04em;
+  padding:5px 11px;border-radius:100px;
+  opacity:0;transition:opacity .3s ease;
+  box-shadow:0 2px 10px rgba(22,38,63,.18);
+}
+.progress.is-reading .progress__pill{opacity:1;}
+
+/* ── 表紙 ──────────────────────────────── */
+.cover{padding:56px 0 0;position:relative;overflow:hidden;}
+.cover__brand{
+  display:flex;justify-content:flex-end;align-items:center;gap:8px;
+  font-family:var(--f-display);font-weight:700;font-size:12px;letter-spacing:.22em;
+  color:var(--ink-70);margin-bottom:34px;
+}
+.cover__brand span{border-bottom:1.5px solid var(--ink-45);padding-bottom:3px;}
+
+.eyebrow{
+  display:inline-block;background:var(--ink);color:var(--paper);
+  font-family:var(--f-display);font-weight:700;font-size:13.5px;letter-spacing:.08em;
+  padding:9px 20px;border-radius:100px;
+}
+@media (min-width:768px){.eyebrow{font-size:15px;}}
+
+.cover__title{
+  font-family:var(--f-display);font-weight:900;
+  font-size:clamp(30px,8.4vw,46px);line-height:1.42;letter-spacing:-.015em;
+  margin:26px 0 0;
+}
+.mark{position:relative;display:inline;background-image:linear-gradient(var(--marker),var(--marker));
+  background-repeat:no-repeat;background-position:0 88%;background-size:0 34%;
+  animation:draw 1s cubic-bezier(.2,.7,.3,1) .55s forwards;}
+@keyframes draw{to{background-size:100% 34%;}}
+
+.cover__sub{
+  font-size:15.5px;line-height:1.95;color:var(--ink-70);margin:30px 0 0;
+}
+@media (min-width:768px){.cover__sub{font-size:17px;}}
+
+.cover__author{
+  font-family:var(--f-display);font-weight:700;font-size:13.5px;letter-spacing:.05em;
+  color:var(--ink-70);margin-top:22px;
+}
+
+/* 紙ナプキン */
+.napkin{
+  position:relative;margin:44px auto 0;max-width:400px;
+  background:var(--napkin);
+  border-radius:3px 10px 4px 8px;
+  padding:30px 22px 34px;
+  transform:rotate(-1.1deg);
+  box-shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 14px 30px -14px rgba(22,38,63,.45);
+  font-family:var(--f-hand);color:var(--ink);
+  text-align:center;line-height:1.85;
+}
+.napkin::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.35) 0 1px,transparent 1px 5px),
+    repeating-linear-gradient(0deg,rgba(22,38,63,.035) 0 1px,transparent 1px 5px);
+  mix-blend-mode:multiply;opacity:.8;
+}
+.napkin__eq{font-size:clamp(16px,4.3vw,19px);}
+.napkin__sum{font-size:clamp(20px,5.6vw,25px);margin-top:14px;}
+.napkin__sum b{font-weight:400;border-bottom:3px solid var(--marker-soft);}
+.napkin__tail{font-size:clamp(16px,4.3vw,19px);margin-top:18px;}
+
+/* 表紙下部の帯 */
+.cover__band{
+  background:var(--ink);color:var(--paper);
+  border-top:5px solid var(--marker);
+  margin-top:48px;padding:44px 0 40px;
+}
+.cover__band .wrap{max-width:var(--measure);}
+.cover__promise{
+  font-family:var(--f-display);font-weight:900;
+  font-size:clamp(24px,6.6vw,34px);line-height:1.5;letter-spacing:-.01em;margin:0;
+}
+.cover__promise em{font-style:normal;color:var(--marker);}
+.cover__meta{
+  font-size:14px;line-height:1.9;color:rgba(244,239,225,.72);margin:24px 0 0;
+}
+.startlink{
+  display:inline-flex;align-items:center;gap:9px;margin-top:26px;
+  font-family:var(--f-display);font-weight:700;font-size:15px;
+  color:var(--paper);text-decoration:none;
+  border-bottom:2px solid var(--marker);padding-bottom:5px;
+}
+.startlink svg{transition:transform .25s ease;}
+.startlink:hover svg{transform:translateY(3px);}
+
+/* ── 注記 ─────────────────────────────── */
+.disclaimer{background:var(--paper-band);padding:32px 0;}
+.disclaimer p{
+  margin:0;font-size:13.5px;line-height:1.9;color:var(--ink-70);
+}
+
+/* ── 本文 ─────────────────────────────── */
+.chapter{padding:60px 0 8px;}
+.chapter + .chapter{border-top:1px solid var(--rule);}
+.chapter__head{margin-bottom:34px;}
+.chapter__num{
+  font-family:var(--f-hand);font-size:clamp(38px,11vw,54px);line-height:1;
+  color:var(--marker);display:block;margin-bottom:4px;
+}
+.chapter__title{
+  font-family:var(--f-display);font-weight:900;
+  font-size:clamp(21px,5.6vw,26px);line-height:1.5;letter-spacing:-.01em;margin:0;
+}
+.chapter p{margin:0 0 1.6em;}
+.chapter strong{
+  font-family:var(--f-display);font-weight:700;letter-spacing:.005em;
+}
+
+/* 山場の一行 */
+.pivot{
+  font-family:var(--f-display);font-weight:900;
+  font-size:clamp(19px,5vw,23px);line-height:1.72;letter-spacing:-.01em;
+  margin:2.2em 0 2.2em !important;
+}
+.pivot--marked{
+  background-image:linear-gradient(var(--marker-soft),var(--marker-soft));
+  background-repeat:no-repeat;background-position:0 82%;background-size:100% 40%;
+  display:inline;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+}
+
+/* セリフのまとまり */
+.talk{
+  border-left:3px solid var(--marker);
+  padding-left:18px;margin:0 0 1.6em;
+}
+.talk p{margin:0 0 .5em;}
+.talk p:last-child{margin-bottom:0;}
+
+/* 本文中の紙ナプキン */
+.napkin--inline{margin:38px auto;transform:rotate(1deg);}
+
+/* ── CTA ──────────────────────────────── */
+.cta{background:var(--ink);color:var(--paper);padding:56px 0 60px;margin-top:56px;}
+.cta__label{
+  font-family:var(--f-display);font-weight:700;font-size:12px;letter-spacing:.18em;
+  color:var(--marker);margin:0 0 14px;
+}
+.cta__title{
+  font-family:var(--f-display);font-weight:900;
+  font-size:clamp(22px,5.8vw,28px);line-height:1.55;margin:0 0 18px;
+}
+.cta__body{font-size:15.5px;line-height:1.95;color:rgba(244,239,225,.82);margin:0 0 30px;}
+.btn{
+  display:block;width:100%;text-align:center;text-decoration:none;
+  background:var(--marker);color:var(--ink);
+  font-family:var(--f-display);font-weight:900;font-size:17px;letter-spacing:.02em;
+  padding:20px 18px;border-radius:8px;
+  box-shadow:0 6px 0 #C79E22;
+  transition:transform .12s ease,box-shadow .12s ease;
+}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 #C79E22;}
+.btn__sub{display:block;font-size:12.5px;font-weight:700;margin-top:6px;opacity:.72;}
+.cta__note{font-size:13px;line-height:1.85;color:rgba(244,239,225,.6);margin:20px 0 0;}
+
+/* ── 巻末メモ ──────────────────────────── */
+.memo{padding:60px 0 20px;background:var(--paper-band);}
+.memo__title{
+  font-family:var(--f-display);font-weight:900;font-size:clamp(20px,5.2vw,25px);
+  line-height:1.5;margin:0 0 10px;
+}
+.memo__lead{font-size:14.5px;line-height:1.9;color:var(--ink-70);margin:0 0 32px;}
+.memo__item{
+  border-top:1px solid var(--rule);padding:20px 0;
+}
+.memo__item:last-of-type{border-bottom:1px solid var(--rule);}
+.memo__num{
+  font-family:var(--f-display);font-weight:900;font-size:19px;letter-spacing:-.01em;
+  margin:0 0 6px;
+}
+.memo__desc{font-size:14.5px;line-height:1.85;color:var(--ink-70);margin:0;}
+.memo__fine{font-size:12.5px;line-height:1.85;color:var(--ink-45);margin:26px 0 0;}
+.memo__dl{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:32px 0 0;padding:18px;text-decoration:none;
+  border:2px solid var(--ink);border-radius:8px;
+  font-family:var(--f-display);font-weight:700;font-size:15px;
+}
+.memo__dl:hover{background:var(--ink);color:var(--paper);}
+
+/* ── 奥付 ─────────────────────────────── */
+.colophon{padding:56px 0 80px;}
+.colophon h2{
+  font-family:var(--f-display);font-weight:900;font-size:19px;line-height:1.6;margin:0 0 12px;
+}
+.colophon p{font-size:14.5px;line-height:1.9;color:var(--ink-70);margin:0 0 20px;}
+.colophon__links{border-top:1px solid var(--rule);padding-top:24px;margin-top:8px;}
+.colophon__link{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:16px 0;border-bottom:1px solid var(--rule);
+  font-family:var(--f-display);font-weight:700;font-size:15px;text-decoration:none;
+}
+.colophon__link small{display:block;font-weight:700;font-size:12px;color:var(--ink-45);margin-top:3px;}
+.colophon__link span:last-child{color:var(--marker);font-size:18px;}
+.colophon__sign{
+  font-family:var(--f-display);font-weight:700;font-size:13px;letter-spacing:.05em;
+  color:var(--ink-45);margin-top:36px;
+}
+
+/* スクロール出現 */
+.rise{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1);}
+.rise.is-in{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<!-- 進捗 -->
+<div class="progress" id="progress" aria-hidden="true">
+  <div class="progress__track"><div class="progress__fill" id="progressFill"></div></div>
+  <div class="progress__pill" id="progressPill">あと15分</div>
+</div>
+
+<!-- ══ 表紙 ══ -->
+<header class="cover">
+  <div class="wrap">
+    <div class="cover__brand"><span>MIMIRAILL</span></div>
+    <p class="eyebrow">経営者のための15分冊子</p>
+    <h1 class="cover__title">AIは気になる。<br>でも、<span class="mark">何から始めればいいか</span><br>わからない社長へ</h1>
+    <p class="cover__sub">「様子見」にも値段があると知った、<br>ある三代目社長の一年</p>
+    <p class="cover__author">株式会社Avanti　八代谷和範</p>
+
+    <div class="napkin">
+      <p class="napkin__eq">社員20人 &times; 週2時間 &times; 時給2,500円</p>
+      <p class="napkin__sum">＝ 月に<b><span id="countUp">40</span>万円</b>ぐらい<br>損しているかも</p>
+      <p class="napkin__tail">時間は待ってくれません</p>
+    </div>
+  </div>
+
+  <div class="cover__band">
+    <div class="wrap">
+      <p class="cover__promise"><em>たった15分の診断から、</em><br>会社が動き始めた。</p>
+      <p class="cover__meta">この冊子は15分で読めます。<br>スマホで最後まで読めるようにしてあります。</p>
+      <a class="startlink" href="#ch1">
+        ここから読む
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1v11M2.5 8L7 12.5 11.5 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ══ 注記 ══ -->
+<div class="disclaimer">
+  <div class="wrap">
+    <p>この物語は、複数の経営者から伺った悩みや現場の課題をもとに構成したフィクションです。登場する時間・金額は、モデル企業を想定した試算です。</p>
+  </div>
+</div>
+
+<!-- ══ 本文 ══ -->
+<main id="article">
+
+<section class="chapter" id="ch1">
+  <div class="wrap">
+    <div class="chapter__head rise">
+      <span class="chapter__num">一</span>
+      <h2 class="chapter__title">組合の夜</h2>
+    </div>
+    <p>あれは去年の秋、組合の会合の帰り道だった。</p>
+    <p>「T建設さん、AI入れたらしいよ。見積の下書き、もうAIが作っとるって」</p>
+    <p>隣を歩いていた理事長が、世間話のつもりで言ったんだと思う。私は「へえ、進んどるんだねえ」と笑って返した。笑って返しながら、胸の中がざわざわして、家に着くまで治まらなかった。</p>
+    <p>その夜、ベッドの中でスマホを開いた。「建設業 AI」で検索すると、出てくる出てくる。AIエージェントがどうの、クロードがどうの。短い動画を何本も見たが、正直、半分も分からなかった。分からないまま、時計は一時を回っていた。</p>
+    <p>翌朝、鏡を見て思った。ウチの会社、このままでいいのか。いや、その前に——</p>
+    <p class="pivot"><span class="pivot--marked">俺は、何をしたらいいんだ？</span></p>
+  </div>
+</section>
+
+<section class="chapter" id="ch2">
+  <div class="wrap">
+    <div class="chapter__head rise">
+      <span class="chapter__num">二</span>
+      <h2 class="chapter__title">「何かやらなきゃ」が口癖だった</h2>
+    </div>
+    <p>自己紹介が遅れた。私は愛知県で建設業をやっている、45歳の三代目経営者だ。社員は50人。祖父が興し、親父が大きくした会社を、5年前に継いだ。</p>
+    <p>継いだ、と言っても、実感は薄い。役員は親父の代からの人たちで、専務は親父の弟。つまり叔父だ。私が小学生の頃、肩車をしてくれた人である。会議で私が何か言うと、「まあ、お前がそう言うなら」と笑う。あの笑い方は、社長に向けるものじゃない。<strong>甥っ子に向けるものだ。</strong></p>
+    <p>だから私はずっと、「親父とは違う何か」を探していた。新しいこと。俺の代でやったと言えること。でも、何をしたらいいのか分からない。設備投資は専務が渋い。「無駄遣いすると、先代に叱られるでな」——先代、つまり私の親父は、もう会長室で盆栽をいじっているだけなのだが。</p>
+    <p>AIのことは、気になってはいた。ChatGPTくらいは触ったことがある。組合の新年会の挨拶文を作らせたら、なかなか大したものだった。だが、そこまでだ。会社で使うとなると話が違う。若い衆に「AIって使っていいんですか」と聞かれても、「ちょっと待っとってくれ」としか言えない。詳しい人間が社内におらんのだ。その「ちょっと」が、もう一年続いていた。</p>
+    <p>そこへ、あの夜の一言だった。T建設は、ウチと同じ規模だ。社長は私より三つ上。<strong>向こうは動いた。ウチは止まっている。</strong></p>
+  </div>
+</section>
+
+<section class="chapter" id="ch3">
+  <div class="wrap">
+    <div class="chapter__head rise">
+      <span class="chapter__num">三</span>
+      <h2 class="chapter__title">15分で、ウチの会社の数字が出た</h2>
+    </div>
+    <p>年が明けてから、飲み仲間の経営者に誘われてAIのセミナーに出た。生成AIがどうとかいう題目で、正直、期待はしていなかった。どうせ横文字の洪水だろうと。</p>
+    <p>ところが、講師が変わった人だった。開口一番、「私はビールとラーメンが好きな54歳です」と言う。専門は「AI超入門」だと言う。超入門て。プロが名乗る言葉か、それは。だが不思議なもので、その一言で会場の空気が緩んだ。<strong>「分からん」と言っていい場所なんだと分かった。</strong></p>
+    <p>セミナーの後、名刺交換の列に並んだ。順番が来て、気づいたら口から出ていた。「ウチみたいな現場仕事の会社でも、使えるもんですか？」</p>
+    <p>講師は売り込みをしなかった。代わりにこう聞いてきた。</p>
+    <div class="talk">
+      <p>「社長、15分だけください。三つ質問します。——毎週必ずやってる書きものの仕事、何があります？」</p>
+    </div>
+    <p>私は指を折った。日報のとりまとめ。見積書の下書き。安全書類。役所に出す書類。元請に出す報告書。……指が足りなくなった。</p>
+    <div class="talk">
+      <p>「その日報、現場の職長さんは一日何分かけてます？」</p>
+      <p>「30分……いや、もっとかな。事務所に戻ってから、夜なべで書いとるのもおる」</p>
+      <p>「それ、AIに下書きさせると10分になります。やってみましょうか」</p>
+    </div>
+    <p>講師はノートパソコンを開き、私が口で説明した現場の一日を、そのままAIに話しかけた。10秒後、画面に日報が出てきた。ウチの様式と大差ない、いや、正直、ウチの若い衆が書くのより読みやすい日報が。</p>
+    <p class="pivot"><span class="pivot--marked">「これ、ウチの話だ」</span></p>
+    <p>と思った。テレビやSNSで見たAIは他所の世界の話だったが、画面に出てきたのは、ウチの現場の日報だった。</p>
+    <p>講師は最後に、紙ナプキンに式をひとつ書いた。</p>
+
+    <div class="napkin napkin--inline">
+      <p class="napkin__eq">社員20人 &times; 週2時間のムダ<br>&times; 時給2,500円</p>
+      <p class="napkin__sum">＝ <b>月に約40万円</b></p>
+    </div>
+
+    <p>「社長が様子見しとる間も、この40万円は毎月流れていきます。道具は待てば良くなりますが、<strong>社員さんが道具に慣れる時間は、待っても縮まりません。</strong>」</p>
+    <p>帰りの車で、あの夜以来のざわざわが、別のものに変わっているのに気づいた。焦りじゃない。<strong>早くやりたい</strong>、だった。</p>
+  </div>
+</section>
+
+<section class="chapter" id="ch4">
+  <div class="wrap">
+    <div class="chapter__head rise">
+      <span class="chapter__num">四</span>
+      <h2 class="chapter__title">役員会の「でも」</h2>
+    </div>
+    <p>分かっていたことだが、役員会は渋かった。</p>
+    <p>「AIねえ」と専務が腕を組んだ。「あれは間違えるんだろう。見積を間違えたら誰が責任取るんだ」</p>
+    <p>来ると分かっていた質問だ。私は診断の後、講師と作戦を練ってあった。</p>
+    <p>「間違えることもあります」と私は言った。「だから分担を決めます。<strong>下書きはAI、判断は人。</strong> 今だって若手の書いた見積は課長が見とるでしょう。それと同じです。変わるのは、白紙から書く時間が消えることだけです」</p>
+    <div class="talk">
+      <p>「情報は漏れんのか。ウチは元請さんの図面も預かっとるんだぞ」</p>
+    </div>
+    <p>「まず、法人向けの契約にして、入れた中身がAIの学習に使われん設定になっとるかを確認します。その上でルールを三つだけ決めます。入れていい情報の線引きをする。客の名前と金額はそのまま貼らん。迷ったら聞く窓口を一人置く。——逆に専務、今のまま放っておく方が危ないんです。<strong>若い衆はもう、個人のスマホでこっそり使っとります。</strong> 禁止するより、会社の道具として表に出した方が安全です」</p>
+    <p>専務の眉が動いた。心当たりがあったのだと思う。</p>
+    <p>「……で、いくらかかるんだ。また無駄遣いか」</p>
+    <p>ここが勝負所だった。私は紙を三枚並べた。</p>
+    <p>「選択肢は三つあります。半日の体験セミナーだけやる案。社員が研修を受ける案。研修だけでなくその後で三か月の伴走を付ける案。——研修は一人40万円です」</p>
+    <p>「40万!?」</p>
+    <p>「ただし、条件を満たせば国の助成金で<strong>最大75%が戻ります</strong>。賃金助成まで入れた試算で、実質は<strong>一人あたり約9万円</strong>。そしてこの制度は<strong>今年度で終わります</strong>。来年やると、まるまる40万円です」</p>
+    <p>さっき書いてもらった紙ナプキンの式も見せた。20人が受講して、研修費は総額800万円。助成金と賃金助成を入れた試算で、実質は約180万円。月40万円のムダが消えるなら、<strong>4か月半で元が取れる</strong>。あとは毎年、効き続ける。</p>
+    <p>長い沈黙のあと、専務が言った。</p>
+    <p>「……お前が、そこまで調べてきたのか」</p>
+    <p>「はい。診断も受けてきました。ウチの数字です」</p>
+    <p>専務は紙をもう一度眺めて、それから、今でも忘れられない一言を言った。</p>
+    <p class="pivot"><span class="pivot--marked">「社長がそこまで言うなら、やってみるか。<br>まずは真ん中の案で」</span></p>
+    <p>——「社長が」。「お前が」でも「坊が」でもなく。<br>私はこの日初めて、あの人に社長と呼ばれた気がする。</p>
+  </div>
+</section>
+
+<section class="chapter" id="ch5">
+  <div class="wrap">
+    <div class="chapter__head rise">
+      <span class="chapter__num">五</span>
+      <h2 class="chapter__title">入れてみたら、意外なことが起きた</h2>
+    </div>
+    <p>先に白状しておくと、最初の一週間はさんざんだった。AIの書く日報は現場の言葉になっとらんくて、ベテランの職長には「社長、わし、自分で書いた方が早いわ」と言われた。講師に泣きつくと、「それが普通です。ここからが研修です」と笑っとった。ウチの現場の言い回しをAIに覚えさせる雛形を、研修の中で一緒に作り直して、二週目からは文句が減った。</p>
+    <p>そこから先は、予想外のことの連続だった。</p>
+    <p>一つ目。初回の研修で講師が「使ったことある人？」と聞いたら、若い衆が三人、おずおずと手を挙げた。やっぱりこっそり使っていたのだ。叱る場面ではない。<strong>あいつらはウチの先行部隊だった。</strong>今は社内のAI相談役に収まっている。</p>
+    <p>二つ目。一番の使い手になったのは、意外や意外、事務のパートの女性だった。元請ごとに書式の違う報告書を、AIと二人三脚で片づけていく。「私、この作業だけで週の半分使っとったんですよ」と笑っていた。その時間は今、ずっと後回しだった労務の整理に充てられている。</p>
+    <p>三つ目。現場の職長連中の日報が、本当に10分になった。ある職長に「どうだ」と聞いたら、「社長、わし、夜なべで日報書かんくなったの、20年ぶりだわ」と言われた。残業規制で頭を抱えていたのが嘘のようだ。</p>
+    <p>そして四つ目。春の採用面接で、学生に言われたのだ。</p>
+    <div class="talk">
+      <p>「御社、AI使ってるんですね。説明会で聞いて、それで志望しました」</p>
+    </div>
+    <p>——T建設に感じたあの焦りを、今度はどこかの会社がウチに感じているのかもしれない。</p>
+  </div>
+</section>
+
+<section class="chapter" id="ch6">
+  <div class="wrap">
+    <div class="chapter__head rise">
+      <span class="chapter__num">六</span>
+      <h2 class="chapter__title">息子の一言</h2>
+    </div>
+    <p>先月、17歳の息子が夕飯の時にぽつりと言った。</p>
+    <div class="talk">
+      <p>「父さんの会社って、AIとか使っとるの？ 友達の親父の会社、なんも使っとらんくて、あいつ『継ぎたくない』って言っとった」</p>
+    </div>
+    <p>継がせたいと思っている。強制はできんが、渡すなら、渡す価値のある会社を渡したい。10年後、あいつが入ってくるかもしれない会社が、「書類は夜なべして書くもんだ」という会社なのか、「単純な仕事は道具に任せて、人は現場と客に向き合う」会社なのか。</p>
+    <p>祖父は仕事を取ってきた。親父は人を育て、会社を大きくした。じゃあ三代目の俺の仕事は何か。一年経った今なら、こう答える。</p>
+    <p class="pivot"><span class="pivot--marked">人が育ち続ける仕組みを、<br>次の代に残すことだ。</span></p>
+    <p>親父を超えたかどうかは、分からん。だが、親父にできんかったことを一つやった。それでもう、十分な気がしている。あれ以来、専務は会議で私の顔を見て話すようになった。</p>
+  </div>
+</section>
+
+<section class="chapter" id="ch7">
+  <div class="wrap">
+    <div class="chapter__head rise">
+      <span class="chapter__num">七</span>
+      <h2 class="chapter__title">あの夜のあなたへ</h2>
+    </div>
+    <p>ここまで読んでくださって、ありがとうございました。</p>
+    <p>もしあなたが、去年の秋の私と同じなら——組合で聞いた誰かの一言が胸に刺さったまま、「何かやらなきゃ」だけが口癖になっているなら——思い出してほしい。</p>
+    <p class="pivot"><span class="pivot--marked">私がやったことは、たった一つ。<br>15分の診断を受けただけだ。</span></p>
+    <p>数字が出れば、役員会と戦える。数字が出れば、様子見の値札が見える。あなたの会社の数字は、あなたの会社からしか出ない。</p>
+    <p>私の診断をしてくれた講師は、この冊子をあなたに渡した、あの白髪の男性である。ビールとラーメンの話は、話半分に聞いておけばいい。だが15分は、本物だった。</p>
+    <p>会場にいるなら、帰る前に声をかけてみてはどうだろう。もう会場を出てしまったなら、下のボタンからでもいい。</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ CTA ══ -->
+<section class="cta">
+  <div class="wrap">
+    <p class="cta__label">AIもったいない時間診断</p>
+    <h2 class="cta__title">15分・無料。<br>御社の数字を、その場で出します。</h2>
+    <p class="cta__body">御社の業務を三つ伺い、AIに任せられる仕事とその時間を、その場で数字にします。売り込みはしません。数字だけ持ち帰って、役員会の話のタネにしてください。</p>
+    <a class="btn" id="ctaMain" href="https://line.me/R/ti/p/%40857peheq" data-cta="line-main">
+      15分診断を予約する
+      <span class="btn__sub">LINEのトークから日程を決めます</span>
+    </a>
+    <p class="cta__note">株式会社Avanti 執行役員　八代谷和範（ヤッシー）</p>
+  </div>
+</section>
+
+<!-- ══ 巻末メモ ══ -->
+<section class="memo">
+  <div class="wrap">
+    <h2 class="memo__title">巻末：物語に出てきた数字のメモ</h2>
+    <p class="memo__lead">役員会に持っていく用です。印刷用のPDFを下に置いてあります。</p>
+
+    <div class="memo__item">
+      <p class="memo__num">月 約40万円</p>
+      <p class="memo__desc">様子見の値札。社員20人 × 週2時間 × 時給2,500円。自社の人数で計算し直せます。</p>
+    </div>
+    <div class="memo__item">
+      <p class="memo__num">最大 75%</p>
+      <p class="memo__desc">人材開発支援助成金（事業展開等リスキリング支援コース）の経費助成率。中小企業・条件あり。受講時間分の賃金助成も加わります。</p>
+    </div>
+    <div class="memo__item">
+      <p class="memo__num">実質 約9万円</p>
+      <p class="memo__desc">研修費40万円／人の、助成金を含めた試算での実質負担。</p>
+    </div>
+    <div class="memo__item">
+      <p class="memo__num">実質 約180万円</p>
+      <p class="memo__desc">20人受講の総額試算。研修費800万円 − 助成金600万円 − 賃金助成約20万円。</p>
+    </div>
+    <div class="memo__item">
+      <p class="memo__num">約 4か月半</p>
+      <p class="memo__desc">回収期間の試算。月約40万円の削減 × 4.5か月 ≒ 実質負担180万円。</p>
+    </div>
+    <div class="memo__item">
+      <p class="memo__num">2026年度</p>
+      <p class="memo__desc">この助成金の最終年度。計画届は研修開始の1か月前までに提出します。</p>
+    </div>
+    <div class="memo__item">
+      <p class="memo__num">ルール3行</p>
+      <p class="memo__desc">①法人向け契約でデータ利用設定を確認する　②客名・金額はそのまま貼らない　③迷ったら聞く窓口を1人決める</p>
+    </div>
+
+    <a class="memo__dl" href="assets/suji-memo.pdf" data-cta="pdf">数字のメモをPDFで保存する（A4・1枚）</a>
+
+    <p class="memo__fine">※助成金の金額・要件は2026年7月時点。支給には10時間以上の訓練、計画届の事前提出などの条件と審査があります。また、助成金の申請を社会保険労務士に依頼した場合は別途費用がかかります。詳細は社会保険労務士にご確認ください。</p>
+  </div>
+</section>
+
+<!-- ══ 奥付 ══ -->
+<footer class="colophon">
+  <div class="wrap">
+    <h2>書いた人</h2>
+    <p>株式会社Avanti 執行役員　八代谷和範（ヤッシー）。愛知県清須市。AI超入門の講師として、中小企業の社内研修と経営者向けの講座をやっています。ビールとラーメンが好きです。</p>
+
+    <div class="colophon__links">
+      <a class="colophon__link" href="#" data-cta="video">
+        <span>自己紹介動画を見る<small>52歳でAIに出会って人生が変わった話・4コマ漫画つき</small></span>
+        <span>→</span>
+      </a>
+      <a class="colophon__link" href="https://line.me/R/ti/p/%40857peheq" data-cta="line-footer">
+        <span>LINEで相談する<small>AI相談室（株式会社Avanti）</small></span>
+        <span>→</span>
+      </a>
+    </div>
+
+    <p class="colophon__sign">MIMIRAILL　ミミライル</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── 残り時間バー ── */
+  var article = document.getElementById('article');
+  var fill = document.getElementById('progressFill');
+  var pill = document.getElementById('progressPill');
+  var bar  = document.getElementById('progress');
+  var TOTAL_MIN = 15;
+  var ticking = false;
+
+  function update(){
+    var top = article.offsetTop;
+    var height = article.offsetHeight;
+    var y = window.scrollY + window.innerHeight * 0.65;
+    var p = (y - top) / height;
+    if (p < 0) p = 0;
+    if (p > 1) p = 1;
+    fill.style.width = (p * 100).toFixed(2) + '%';
+    var left = Math.ceil(TOTAL_MIN * (1 - p));
+    pill.textContent = left > 0 ? 'あと' + left + '分' : '読了';
+    bar.classList.toggle('is-reading', p > 0.01 && p < 1);
+    ticking = false;
+  }
+  function onScroll(){
+    if (!ticking){ ticking = true; requestAnimationFrame(update); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  update();
+
+  /* ── 章見出しの出現 ── */
+  if ('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.25});
+    document.querySelectorAll('.rise').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.rise').forEach(function(el){ el.classList.add('is-in'); });
+  }
+
+  /* ── 表紙の40をカウントアップ ── */
+  var cu = document.getElementById('countUp');
+  if (cu && !reduce){
+    var target = 40, cur = 0;
+    cu.textContent = '0';
+    var step = function(){
+      cur += 2;
+      if (cur >= target){ cu.textContent = target; return; }
+      cu.textContent = cur;
+      setTimeout(step, 34);
+    };
+    setTimeout(step, 900);
+  }
+
+  /* ── GA4：読了率とボタン ── */
+  var marks = {25:false, 50:false, 75:false, 100:false};
+  function track(name, params){
+    if (typeof gtag === 'function') gtag('event', name, params || {});
+  }
+  window.addEventListener('scroll', function(){
+    var top = article.offsetTop, height = article.offsetHeight;
+    var p = (window.scrollY + window.innerHeight - top) / height * 100;
+    [25,50,75,100].forEach(function(m){
+      if (!marks[m] && p >= m){ marks[m] = true; track('booklet_read', {percent:m}); }
+    });
+  }, {passive:true});
+
+  document.querySelectorAll('[data-cta]').forEach(function(el){
+    el.addEventListener('click', function(){
+      track('booklet_cta', {cta: el.getAttribute('data-cta')});
+    });
+  });
+})();
+</script>
+
+<!-- GA4：測定IDを差し替えてください -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+</body>
+</html>
